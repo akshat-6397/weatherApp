@@ -88,7 +88,7 @@ const MainComponent = () => {
           ),
         });
         setPlace('');
-        toast.success("Weather Data Captured!😎", {position: "bottom-center",
+        toast.success("Weather Data Captured!😎", {position: "top-center",
         autoClose: 3000,
         hideProgressBar: false,
         closeOnClick: true,
@@ -98,7 +98,7 @@ const MainComponent = () => {
         theme: "colored",});
         setLoading(false);
       })
-      .catch((error) => {toast.warn("Please enter a valid city or you can try with different name🤨.", {position: "bottom-center",
+      .catch((error) => {toast.warn("Please enter a valid city or you can try with different name🤨.", {position: "top-center",
       autoClose: 5000,
       hideProgressBar: false,
       closeOnClick: true,
