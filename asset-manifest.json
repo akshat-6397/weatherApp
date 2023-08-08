@@ -1,0 +1,23 @@
+{
+  "files": {
+    "main.css": "/weatherApp/static/css/main.9359f878.css",
+    "main.js": "/weatherApp/static/js/main.d27f9931.js",
+    "static/js/787.d62d1c65.chunk.js": "/weatherApp/static/js/787.d62d1c65.chunk.js",
+    "static/media/lightingRain.png": "/weatherApp/static/media/lightingRain.431b0b9d16d008121a19.png",
+    "static/media/fogCloudIcon.png": "/weatherApp/static/media/fogCloudIcon.ef09611d59f70897089e.png",
+    "static/media/cloudSnowIcon.png": "/weatherApp/static/media/cloudSnowIcon.5fdecc099ea93cb8a050.png",
+    "static/media/cloudyIconNight.png": "/weatherApp/static/media/cloudyIconNight.f0c3429255909e97e2f5.png",
+    "static/media/cloudyIcon.png": "/weatherApp/static/media/cloudyIcon.66f59db6a9f57ddcfc20.png",
+    "static/media/drizzleCloudIcon.png": "/weatherApp/static/media/drizzleCloudIcon.1437780125567f5f8f6a.png",
+    "static/media/dustIcon.png": "/weatherApp/static/media/dustIcon.7d16b238d1c95556a254.png",
+    "static/media/tornadoCloudIcon.png": "/weatherApp/static/media/tornadoCloudIcon.ce082804c1c015834fbf.png",
+    "index.html": "/weatherApp/index.html",
+    "main.9359f878.css.map": "/weatherApp/static/css/main.9359f878.css.map",
+    "main.d27f9931.js.map": "/weatherApp/static/js/main.d27f9931.js.map",
+    "787.d62d1c65.chunk.js.map": "/weatherApp/static/js/787.d62d1c65.chunk.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.9359f878.css",
+    "static/js/main.d27f9931.js"
+  ]
+}
