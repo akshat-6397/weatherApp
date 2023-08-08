@@ -58,7 +58,9 @@ const MainComponent = () => {
     humidity: 0,
     visibility: 0,
     windSpeed: 0,
-    text:''
+    text:'',
+    country: '',
+    ft: 0,
   });
   const [place, setPlace] = useState("");
   const [loading, setLoading] = useState(false);
@@ -72,17 +74,21 @@ const MainComponent = () => {
       .then((response) => {
         setMydata({
           ...mydata,
-          city: response.data.name,
-          humidity: response.data.main.humidity,
+          city: response?.data.name,
+          humidity: response?.data?.main?.humidity,
           temperature: Math.round(
-            (response.data.main.temp - 273.15).toFixed(2)
+            (response?.data?.main?.temp - 273.15).toFixed(2)
           ),
-          visibility: response.data.visibility,
-          windSpeed: response.data.wind.speed,
-          text: response.data.weather[0].main,
+          visibility: response?.data?.visibility,
+          windSpeed: response?.data?.wind?.speed,
+          text: response?.data?.weather[0]?.main,
+          country: response?.data?.sys?.country,
+          ft: Math.round(
+            (response?.data?.main?.feels_like - 273.15).toFixed(2)
+          ),
         });
         setPlace('');
-        toast.success("Weather Data Captured!😎", {position: "top-center",
+        toast.success("Weather Data Captured!😎", {position: "bottom-center",
         autoClose: 3000,
         hideProgressBar: false,
         closeOnClick: true,
@@ -90,17 +96,20 @@ const MainComponent = () => {
         draggable: true,
         progress: undefined,
         theme: "colored",});
+        setLoading(false);
       })
-      .catch((error) => toast.warn("Please Enter valid city", {position: "top-center",
-      autoClose: 3000,
+      .catch((error) => {toast.warn("Please enter a valid city or you can try with different name🤨.", {position: "bottom-center",
+      autoClose: 5000,
       hideProgressBar: false,
       closeOnClick: true,
       pauseOnHover: false,
       draggable: true,
       progress: undefined,
-      theme: "dark",}));
-
-      setLoading(false);
+      theme: "dark",});
+      setTimeout(() => {
+        setLoading(false);
+      }, 5000);
+    });
   };
 
   const handleKeyPress = (e) => {
@@ -108,6 +117,10 @@ const MainComponent = () => {
         buttonRef.current.click();
     }
   };
+
+  const handleLoadClick = () => {
+    return;
+  }
 
   return (
     <div className="border bg-gradient-to-r from-blue-900 to-indigo-700 border-white lg:w-1/3 md:w-4/5 sm:w-4/5 w-full border-solid p-5 shadow-2xl shadow-indigo-900">
@@ -121,8 +134,8 @@ const MainComponent = () => {
           onChange={(e) => setPlace(e.target.value)}
         />
         <Button
-          className="bg-gray-950 rounded-full p-1 text-2xl shadow-2xl shadow-white text-white ml-2 mt-1"
-          onClick={handleSearchClick}
+          className={`bg-gray-950 rounded-full p-1 text-2xl shadow-2xl shadow-white text-white ml-2 mt-1 ${loading?'opacity-70':''}`}
+          onClick={loading?handleLoadClick:handleSearchClick}
           ref={buttonRef}
         >{loading?<BiLoaderAlt className="animate-spin" />:"Search"}</Button>
       </div>
