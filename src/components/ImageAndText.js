@@ -29,7 +29,7 @@ const ImageAndText = ({data}) => {
             case "Tornado":
                 return <img src={tornadoCloudIcon} alt="tornado" className="h-32 w-32" />;
             default: 
-                return <FiSun className="animate-spin text-yellow-300" ></FiSun>;                
+                return <FiSun className="text-yellow-300" style={{animation: "spin 20s linear infinite"}} ></FiSun>;                
         }
     };
 
@@ -41,14 +41,10 @@ const ImageAndText = ({data}) => {
       <div className="flex justify-center text-5xl mt-5"><label>{data.text}</label></div>
       <div>
         <div className="mt-5 text-6xl flex justify-center">{data.temperature}°C</div>
-        {/* <div className="flex justify-center mt-2"><hr className="w-1/3"></hr></div> */}
-        <div className="flex justify-between w-1/2 m-auto mt-8"><label>City</label><span>{data.city}</span></div>
-        <div className="flex justify-center mt-2"><hr className="w-1/2"></hr></div>
-        <div className="flex justify-between w-1/2 m-auto mt-8"><label>Humidity</label><span>{data.humidity}%</span></div>
-        <div className="flex justify-center mt-2"><hr className="w-1/2"></hr></div>
-        <div className="flex justify-between w-1/2 m-auto mt-8"><label>visiblity</label><span>{data.visibility} mi</span></div>
-        <div className="flex justify-center mt-2"><hr className="w-1/2"></hr></div>
-        <div className="flex justify-between w-1/2 m-auto mt-8"><label>Wind Speed</label><span>{data.windSpeed} km/h</span></div>
+        <div className="flex justify-between border-b pb-3 lg:w-4/5 sm:w-2/5 md:w-4/5 m-auto mt-6"><label>City</label><span>{data.city}</span></div>
+        <div className="flex justify-between border-b pb-3 lg:w-4/5 sm:w-2/5 md:w-4/5 m-auto mt-6"><label>Humidity</label><span>{data.humidity}%</span></div>
+        <div className="flex justify-between border-b pb-3 lg:w-4/5 sm:w-2/5 md:w-4/5 m-auto mt-6"><label>visiblity</label><span>{data.visibility} mi</span></div>
+        <div className="flex justify-between lg:w-4/5 sm:w-2/5 md:w-4/5 m-auto mt-6"><label>Wind Speed</label><span>{data.windSpeed} km/h</span></div>
       </div>
     </div>
   );

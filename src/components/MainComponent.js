@@ -2,10 +2,14 @@ import React, { useRef, useState } from "react";
 import ImageAndText from "./ImageAndText";
 import axios from "axios";
 import styled from 'styled-components';
+import { BiLoaderAlt } from "react-icons/bi";
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 const Button = styled.a`
   align-items: center;
   appearance: none;
+  width: 100px;
   background-image: radial-gradient(100% 100% at 100% 0, #5adaff 0, #5468ff 100%);
   border: 0;
   border-radius: 30px;
@@ -57,14 +61,15 @@ const MainComponent = () => {
     text:''
   });
   const [place, setPlace] = useState("");
+  const [loading, setLoading] = useState(false);
 
   const handleSearchClick = () => {
+    setLoading(true);
     axios
       .request(
         `https://api.openweathermap.org/data/2.5/weather?q=${place}&appid=577b76062193c8d60b4f5467d0baaade`
       )
       .then((response) => {
-        console.log(response.data);
         setMydata({
           ...mydata,
           city: response.data.name,
@@ -77,8 +82,25 @@ const MainComponent = () => {
           text: response.data.weather[0].main,
         });
         setPlace('');
+        toast.success("Weather Data Captured!😎", {position: "top-center",
+        autoClose: 3000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: false,
+        draggable: true,
+        progress: undefined,
+        theme: "colored",});
       })
-      .catch((error) => alert(error));
+      .catch((error) => toast.warn("Please Enter valid city", {position: "top-center",
+      autoClose: 3000,
+      hideProgressBar: false,
+      closeOnClick: true,
+      pauseOnHover: false,
+      draggable: true,
+      progress: undefined,
+      theme: "dark",}));
+
+      setLoading(false);
   };
 
   const handleKeyPress = (e) => {
@@ -88,7 +110,7 @@ const MainComponent = () => {
   };
 
   return (
-    <div className="border bg-gradient-to-r from-blue-900 to-indigo-700 border-white lg:w-1/3 md:w-4/5 sm:w-4/5 w-full border-solid p-5">
+    <div className="border bg-gradient-to-r from-blue-900 to-indigo-700 border-white lg:w-1/3 md:w-4/5 sm:w-4/5 w-full border-solid p-5 shadow-2xl shadow-indigo-900">
       <div className="flex justify-center mt-5 relative">
         <input
           className="p-2 text-white py-1 mr-30 bg-transparent border-b-2 outline-none placeholder-white  w-4/5"
@@ -99,12 +121,13 @@ const MainComponent = () => {
           onChange={(e) => setPlace(e.target.value)}
         />
         <Button
-          className="bg-gray-950 rounded-full p-1 text-2xl shadow-2xl shadow-white text-white mt-1"
+          className="bg-gray-950 rounded-full p-1 text-2xl shadow-2xl shadow-white text-white ml-2 mt-1"
           onClick={handleSearchClick}
           ref={buttonRef}
-        >Search</Button>
+        >{loading?<BiLoaderAlt className="animate-spin" />:"Search"}</Button>
       </div>
       <ImageAndText data={mydata} />
+      <ToastContainer />
     </div>
   );
 };
