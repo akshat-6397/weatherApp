@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useRef, useState } from "react";
 import ImageAndText from "./ImageAndText";
 import axios from "axios";
 import styled from 'styled-components';
@@ -8,7 +8,7 @@ const Button = styled.a`
   appearance: none;
   background-image: radial-gradient(100% 100% at 100% 0, #5adaff 0, #5468ff 100%);
   border: 0;
-  border-radius: 6px;
+  border-radius: 30px;
   box-shadow: rgba(45, 35, 66, .4) 0 2px 4px,rgba(45, 35, 66, .3) 0 7px 13px -3px,rgba(58, 65, 111, .5) 0 -3px 0 inset;
   box-sizing: border-box;
   color: #fff;
@@ -47,6 +47,7 @@ const Button = styled.a`
 `;
 
 const MainComponent = () => {
+    const buttonRef = useRef();
   const [mydata, setMydata] = useState({
     temperature: 0,
     city: "",
@@ -80,19 +81,27 @@ const MainComponent = () => {
       .catch((error) => alert(error));
   };
 
+  const handleKeyPress = (e) => {
+    if(e.key === "Enter"){
+        buttonRef.current.click();
+    }
+  };
+
   return (
-    <div className="border bg-zinc-600 border-white lg:w-1/3 md:w-4/5 sm:w-4/5 w-full border-solid p-5">
+    <div className="border bg-gradient-to-r from-blue-900 to-indigo-700 border-white lg:w-1/3 md:w-4/5 sm:w-4/5 w-full border-solid p-5">
       <div className="flex justify-center mt-5 relative">
         <input
-          className="p-2 text-white py-1 mr-30 bg-transparent border-b-2 outline-none  w-4/5"
+          className="p-2 text-white py-1 mr-30 bg-transparent border-b-2 outline-none placeholder-white  w-4/5"
           type="text"
           placeholder="Enter a City...."
           value={place}
+          onKeyDown={handleKeyPress}
           onChange={(e) => setPlace(e.target.value)}
         />
         <Button
           className="bg-gray-950 rounded-full p-1 text-2xl shadow-2xl shadow-white text-white mt-1"
           onClick={handleSearchClick}
+          ref={buttonRef}
         >Search</Button>
       </div>
       <ImageAndText data={mydata} />

@@ -7,7 +7,7 @@ module.exports = {
     extend: {
       animation: {
         'spin': 'spin 20s linear infinite',
-      }
+      },
     }
   },
   plugins: [],
